@@ -3,35 +3,99 @@
 #### 介绍
 enjoy模板引擎starter
 
-#### 软件架构
-软件架构说明
+#### 框架版本
+1. 1.x依赖于springboot 1.5.x版本，JDK1.7+
+2. 2.0.x依赖于springboot 2.0.x版本，JDK1.8+
+
+#### 起步
+```xml
+<dependency>
+    <groupId>com.xbdframework.boot</groupId>
+    <artifactId>enjoy-spring-boot-starter</artifactId>
+    <version>版本号</version>
+</dependency>
+```
+
+#### 属性配置
+EnjoyProperties
+<table>
+    <tr>
+        <td>配置项</td>
+        <td>说明</td>
+        <td>默认值</td>
+    </tr>
+    <tr>
+        <td>devMode</td>
+        <td>开发模式</td>
+        <td>false</td>
+    </tr>
+    <tr>
+        <td>prefix</td>
+        <td>模板前缀</td>
+        <td>无</td>
+    </tr>
+    <tr>
+        <td>suffix</td>
+        <td>模板后缀</td>
+        <td>.html</td>
+    </tr>
+    <tr>
+        <td>contentType</td>
+        <td>contentType</td>
+        <td>text/html</td>
+    </tr>
+    <tr>
+        <td>templatePath</td>
+        <td>模板路径</td>
+        <td>classpath:/templates/</td>
+    </tr>
+    <tr>
+        <td>checkTemplateLocation</td>
+        <td>模板路径检查</td>
+        <td>true</td>
+    </tr>
+    <tr>
+        <td>exposeRequestAttributes</td>
+        <td></td>
+        <td>false</td>
+    </tr>
+    <tr>
+        <td>allowRequestOverride</td>
+        <td></td>
+        <td>false</td>
+    </tr>
+    <tr>
+        <td>exposeSessionAttributes</td>
+        <td></td>
+        <td>false</td>
+    </tr>
+    <tr>
+        <td>allowSessionOverride</td>
+        <td></td>
+        <td>false</td>
+    </tr>
+    <tr>
+        <td>exposeSpringMacroHelpers</td>
+        <td></td>
+        <td>false</td>
+    </tr>
+    <tr>
+        <td>sessionInView</td>
+        <td></td>
+        <td>false</td>
+    </tr>
+    <tr>
+        <td>createSession</td>
+        <td></td>
+        <td>false</td>
+    </tr>
+</table>
+
+#### 个性化配置
+
+实现JFinalViewResolverCustomizer接口并注册为spring bean即可
+
+#### 异常页面
+EnjoyTemplateAvailabilityProvider提供默认异常页面的扫描逻辑
 
 
-#### 安装教程
-
-1. xxxx
-2. xxxx
-3. xxxx
-
-#### 使用说明
-
-1. xxxx
-2. xxxx
-3. xxxx
-
-#### 参与贡献
-
-1. Fork 本仓库
-2. 新建 Feat_xxx 分支
-3. 提交代码
-4. 新建 Pull Request
-
-
-#### 码云特技
-
-1. 使用 Readme\_XXX.md 来支持不同的语言，例如 Readme\_en.md, Readme\_zh.md
-2. 码云官方博客 [blog.gitee.com](https://blog.gitee.com)
-3. 你可以 [https://gitee.com/explore](https://gitee.com/explore) 这个地址来了解码云上的优秀开源项目
-4. [GVP](https://gitee.com/gvp) 全称是码云最有价值开源项目，是码云综合评定出的优秀开源项目
-5. 码云官方提供的使用手册 [https://gitee.com/help](https://gitee.com/help)
-6. 码云封面人物是一档用来展示码云会员风采的栏目 [https://gitee.com/gitee-stars/](https://gitee.com/gitee-stars/)
