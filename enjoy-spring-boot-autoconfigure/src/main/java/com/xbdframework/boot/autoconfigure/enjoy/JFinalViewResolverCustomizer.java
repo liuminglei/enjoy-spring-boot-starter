@@ -8,6 +8,7 @@ import com.jfinal.template.ext.spring.JFinalViewResolver;
  * @author 刘明磊
  * @since 1.0.0
  */
+@FunctionalInterface
 public interface JFinalViewResolverCustomizer {
 
 	/**

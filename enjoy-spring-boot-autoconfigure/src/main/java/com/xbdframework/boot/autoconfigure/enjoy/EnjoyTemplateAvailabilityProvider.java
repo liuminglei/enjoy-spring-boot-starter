@@ -1,10 +1,11 @@
 package com.xbdframework.boot.autoconfigure.enjoy;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import org.springframework.boot.autoconfigure.template.PathBasedTemplateAvailabilityProvider;
 import org.springframework.boot.autoconfigure.template.TemplateAvailabilityProvider;
-import org.springframework.boot.bind.RelaxedPropertyResolver;
-import org.springframework.core.env.Environment;
-import org.springframework.core.io.ResourceLoader;
-import org.springframework.util.ClassUtils;
 import org.springframework.util.ResourceUtils;
 
 /**
@@ -14,25 +15,37 @@ import org.springframework.util.ResourceUtils;
  * @author 刘明磊
  * @since 1.0.0
  */
-public class EnjoyTemplateAvailabilityProvider implements TemplateAvailabilityProvider {
+public class EnjoyTemplateAvailabilityProvider extends PathBasedTemplateAvailabilityProvider {
 
-	@Override
-	public boolean isTemplateAvailable(String view, Environment environment,
-			ClassLoader classLoader, ResourceLoader resourceLoader) {
-		if (ClassUtils.isPresent("com.jfinal.template.EngineConfig", classLoader)) {
-			RelaxedPropertyResolver resolver = new RelaxedPropertyResolver(environment,
-					"spring.enjoy.");
-			String loaderPath = resolver.getProperty("template-loader-path",
-					ResourceUtils.CLASSPATH_URL_PREFIX
-							+ EnjoyProperties.DEFAULT_TEMPLATE_LOADER_PATH);
-			String prefix = resolver.getProperty("prefix",
-					EnjoyProperties.DEFAULT_PREFIX);
-			String suffix = resolver.getProperty("suffix",
-					EnjoyProperties.DEFAULT_SUFFIX);
-			return resourceLoader.getResource(loaderPath + prefix + view + suffix)
-					.exists();
+	public EnjoyTemplateAvailabilityProvider() {
+		super("com.jfinal.template.EngineConfig",
+				EnjoyTemplateAvailabilityProperties.class, "spring.enjoy");
+	}
+
+	static final class EnjoyTemplateAvailabilityProperties
+			extends PathBasedTemplateAvailabilityProvider.TemplateAvailabilityProperties {
+
+		private List<String> templateLoaderPath = new ArrayList<>(
+				Arrays.asList(ResourceUtils.CLASSPATH_URL_PREFIX
+						+ EnjoyProperties.DEFAULT_TEMPLATE_LOADER_PATH));
+
+		EnjoyTemplateAvailabilityProperties() {
+			super(EnjoyProperties.DEFAULT_PREFIX, EnjoyProperties.DEFAULT_SUFFIX);
 		}
-		return false;
+
+		@Override
+		protected List<String> getLoaderPath() {
+			return this.templateLoaderPath;
+		}
+
+		public List<String> getTemplateLoaderPath() {
+			return this.templateLoaderPath;
+		}
+
+		public void setTemplateLoaderPath(List<String> templateLoaderPath) {
+			this.templateLoaderPath = templateLoaderPath;
+		}
+
 	}
 
 }

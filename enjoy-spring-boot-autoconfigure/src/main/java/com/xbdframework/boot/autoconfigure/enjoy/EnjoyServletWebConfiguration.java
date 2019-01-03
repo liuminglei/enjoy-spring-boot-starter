@@ -1,6 +1,8 @@
 package com.xbdframework.boot.autoconfigure.enjoy;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 import javax.servlet.Servlet;
 
 import com.jfinal.template.ext.spring.JFinalViewResolver;
@@ -10,7 +12,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
-import org.springframework.boot.autoconfigure.web.WebMvcAutoConfiguration;
+import org.springframework.boot.autoconfigure.web.servlet.WebMvcAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 
 /**
@@ -29,7 +31,7 @@ public class EnjoyServletWebConfiguration extends AbstractEnjoyConfiguration {
 	protected EnjoyServletWebConfiguration(EnjoyProperties enjoyProperties,
 			ObjectProvider<List<JFinalViewResolverCustomizer>> viewResolverCustomizers) {
 		super(enjoyProperties);
-		this.jFinalViewResolverCustomizers = viewResolverCustomizers.getIfAvailable();
+		this.jFinalViewResolverCustomizers = Optional.ofNullable(viewResolverCustomizers.getIfAvailable()).orElse(Collections.emptyList());
 	}
 
 	@Bean
@@ -39,7 +41,7 @@ public class EnjoyServletWebConfiguration extends AbstractEnjoyConfiguration {
 		JFinalViewResolver jFinalViewResolver = new JFinalViewResolver();
 
 		// 通用配置
-		this.getProperties().applyToViewResolver(jFinalViewResolver);
+		this.getProperties().applyToMvcViewResolver(jFinalViewResolver);
 
 		// enjoy特殊配置
 		applyProperties(jFinalViewResolver);
