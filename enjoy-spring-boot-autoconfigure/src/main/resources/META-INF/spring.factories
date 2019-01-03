@@ -1,0 +1,7 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.xbdframework.boot.autoconfigure.enjoy.EnjoyAutoConfiguration
+
+
+# Template availability providers
+org.springframework.boot.autoconfigure.template.TemplateAvailabilityProvider=\
+com.xbdframework.boot.autoconfigure.enjoy.EnjoyTemplateAvailabilityProvider
